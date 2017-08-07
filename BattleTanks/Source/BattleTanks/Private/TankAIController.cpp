@@ -19,8 +19,8 @@ ATank* ATankAIController::GetPlayerTank() const
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
-	auto ControlledTank = GetControlledTank();
-	auto TargetPlayer = GetPlayerTank();
+	ControlledTank = GetControlledTank();
+	TargetPlayer = GetPlayerTank();
 
 	if (!ControlledTank)
 	{
@@ -34,5 +34,18 @@ void ATankAIController::BeginPlay()
 			UE_LOG(LogTemp, Warning, TEXT("%s has found target: %s"), *GetName(), *TargetPlayer->GetName());
 		}
 	}
+}
+
+void ATankAIController::Tick(float deltaTime) 
+{
+	Super::Tick(deltaTime);
+
+	//Assuming that the AI always has a tank and a target player.
+	if (!ControlledTank || !TargetPlayer) 
+	{
+		return;
+	}
+	ControlledTank->AimAt(TargetPlayer->GetActorLocation());
+
 }
 
