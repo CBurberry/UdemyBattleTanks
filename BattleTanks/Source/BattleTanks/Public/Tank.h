@@ -27,5 +27,8 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
 	void AimAt(FVector TargetLocation);
+
+	UFUNCTION(BlueprintCallable, Category = "TankSetup")
+	void SetBarrelReference(class UStaticMeshComponent* BarrelToSet);
 	
 };

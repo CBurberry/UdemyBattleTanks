@@ -41,3 +41,12 @@ void ATank::AimAt(FVector TargetLocation)
 	AimComponent->AimAt(TargetLocation);
 }
 
+void ATank::SetBarrelReference(class UStaticMeshComponent* BarrelToSet) 
+{
+	if (!AimComponent) 
+	{
+		return;
+	}
+	AimComponent->SetBarrelReference(BarrelToSet);
+}
+
