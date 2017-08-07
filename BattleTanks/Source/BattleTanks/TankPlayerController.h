@@ -19,6 +19,9 @@ private:
 	//Start the tank moving the barrel towards the crosshair target.
 	void AimTowardsCrosshair();
 
+	//Get world location of linetrace through crosshair, true if hits landscape.
+	bool GetSightRayHitLocation(FVector& out_HitLocation) const;
+
 public:
 	virtual void BeginPlay() override;
 
