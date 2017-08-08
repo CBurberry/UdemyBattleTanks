@@ -40,12 +40,14 @@ void UTankAimingComponent::AimAt(FVector TargetLocation, float LaunchSpeed)
 			0.0f,
 			0.0f,
 			ESuggestProjVelocityTraceOption::DoNotTrace
+			//FFN - Make sure to define the params like this to prevent known inconsistency bug with return value.
 		);
 
+	//TODO - Currently always true even when looking at the sky, probbaly to do with out_hitlocation set to 0 when nothing in range.
 	if (result) 
 	{
 		FVector LaunchDirectionVector = out_LaunchVelocity.GetSafeNormal();
-		UE_LOG(LogTemp, Warning, TEXT("%s Aiming at: %s"), *GetOwner()->GetName(), *LaunchDirectionVector.ToString());
+		//UE_LOG(LogTemp, Warning, TEXT("%s Aiming at: %s"), *GetOwner()->GetName(), *LaunchDirectionVector.ToString());
 		MoveBarrelTowards(LaunchDirectionVector);
 	}
 }
@@ -61,7 +63,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	FRotator BarrelRotator = Barrel->GetForwardVector().Rotation();
 	FRotator AimAsRotator = AimDirection.Rotation();
 	FRotator DeltaRotator = AimAsRotator - BarrelRotator;
-	UE_LOG(LogTemp, Warning, TEXT("AimAsRotator: %s"), *DeltaRotator.ToString())
+	//UE_LOG(LogTemp, Warning, TEXT("AimAsRotator: %s"), *DeltaRotator.ToString())
 
 	Barrel->Elevate(5);	//TODO - remove magic literal
 	
