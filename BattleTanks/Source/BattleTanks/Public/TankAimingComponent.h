@@ -13,6 +13,7 @@ class BATTLETANKS_API UTankAimingComponent : public UActorComponent
 
 private:
 	class UTankBarrel* Barrel = nullptr;
+	class UTankTurret* Turret = nullptr;
 
 	//TODO - Add turret reference.
 
@@ -21,6 +22,7 @@ public:
 	UTankAimingComponent();
 
 	void SetBarrelReference(class UTankBarrel* BarrelToSet);
+	void SetTurretReference(class UTankTurret* TurretToSet);
 
 	void AimAt(FVector WorldSpaceAim, float LaunchSpeed);
 
