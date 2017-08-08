@@ -21,7 +21,7 @@ void UTankAimingComponent::AimAt(FVector TargetLocation, float LaunchSpeed)
 	auto BarrelLocation = Barrel->GetComponentLocation();
 	//UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s from %s"), *GetOwner()->GetName(),*TargetLocation.ToString(), *BarrelLocation.ToString());
 
-	if (!Barrel) 
+	if (!Barrel || !Turret) 
 	{
 		return;
 	}

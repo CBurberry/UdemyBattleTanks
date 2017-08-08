@@ -19,7 +19,7 @@ private:
 	float MaxDegreesPerSecond = 20.0f;
 
 public:
-	// -1 = Max leftward movement, +1 = Max rightward movement
+	// -1 = Max leftward movement, +1 = Max rightward movement - TODO rotation at -180/180 treated as different direction.
 	void Rotate(float RelativeSpeed);
 	
 };

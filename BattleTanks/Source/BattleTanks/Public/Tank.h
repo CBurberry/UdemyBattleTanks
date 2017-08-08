@@ -13,7 +13,7 @@ class BATTLETANKS_API ATank : public APawn
 private:
 
 	UPROPERTY(EditAnywhere, Category = "Firing")
-	float LaunchSpeed = 100000.0f;	//TODO - find sensible default.
+	float LaunchSpeed = 4000.0f;	//TODO - find sensible default.
 
 protected:
 	class UTankAimingComponent* AimComponent = nullptr;
@@ -36,5 +36,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "TankSetup")
 	void SetTurretReference(class UTankTurret* TurretToSet);
+
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	void Fire();
 	
 };
