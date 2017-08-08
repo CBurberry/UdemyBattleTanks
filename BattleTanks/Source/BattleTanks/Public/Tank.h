@@ -10,6 +10,11 @@ class BATTLETANKS_API ATank : public APawn
 {
 	GENERATED_BODY()
 
+private:
+
+	UPROPERTY(EditAnywhere, Category = "Firing")
+	float LaunchSpeed = 100000.0f;	//TODO - find sensible default.
+
 protected:
 	class UTankAimingComponent* AimComponent = nullptr;
 
@@ -26,9 +31,10 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
+	//Aim the gun at the target location.
 	void AimAt(FVector TargetLocation);
 
 	UFUNCTION(BlueprintCallable, Category = "TankSetup")
-	void SetBarrelReference(class UStaticMeshComponent* BarrelToSet);
+	void SetBarrelReference(class UTankBarrel* BarrelToSet);
 	
 };

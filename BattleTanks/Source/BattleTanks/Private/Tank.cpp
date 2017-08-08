@@ -1,9 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BattleTanks.h"
-#include "Tank.h"
-#include "TankAimingComponent.h"
-
+#include "Public/TankAimingComponent.h"
+#include "Public/Tank.h"
 
 // Sets default values
 ATank::ATank()
@@ -38,10 +37,10 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 
 void ATank::AimAt(FVector TargetLocation) 
 {
-	AimComponent->AimAt(TargetLocation);
+	AimComponent->AimAt(TargetLocation, LaunchSpeed);
 }
 
-void ATank::SetBarrelReference(class UStaticMeshComponent* BarrelToSet) 
+void ATank::SetBarrelReference(class UTankBarrel* BarrelToSet) 
 {
 	if (!AimComponent) 
 	{
