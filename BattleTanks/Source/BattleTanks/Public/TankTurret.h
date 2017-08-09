@@ -15,7 +15,7 @@ class BATTLETANKS_API UTankTurret : public UStaticMeshComponent
 	
 private:
 	///The variables are given sensible defaults.
-	UPROPERTY(EditAnywhere, Category = "Aim Rotation")
+	UPROPERTY(EditDefaultsOnly, Category = "Aim Rotation")
 	float MaxDegreesPerSecond = 20.0f;
 
 public:

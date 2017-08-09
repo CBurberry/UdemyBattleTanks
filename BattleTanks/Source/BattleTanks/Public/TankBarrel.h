@@ -16,13 +16,13 @@ class BATTLETANKS_API UTankBarrel : public UStaticMeshComponent
 private:
 
 	///The below 3 variables are given sensible defaults.
-	UPROPERTY(EditAnywhere, Category = "Aim Rotation")
+	UPROPERTY(EditDefaultsOnly, Category = "Aim Rotation")
 	float MaxDegreesPerSecond = 20.0f;
 
-	UPROPERTY(EditAnywhere, Category = "Aim Rotation")
+	UPROPERTY(EditDefaultsOnly, Category = "Aim Rotation")
 	float MaxElevationDegrees = 30.0f;
 
-	UPROPERTY(EditAnywhere, Category = "Aim Rotation")
+	UPROPERTY(EditDefaultsOnly, Category = "Aim Rotation")
 	float MinElevationDegrees = 0.0f;
 
 

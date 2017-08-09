@@ -22,10 +22,10 @@ private:
 	//Get world location of linetrace through crosshair, true if hits landscape.
 	bool GetSightRayHitLocation(FVector& out_HitLocation) const;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float CrosshairXLocation = 0.5f;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float CrosshairYLocation = 0.33333f;
 
 	//Get the Unit vector components for X,Y,Z from the camera crosshair/dot.
@@ -35,7 +35,7 @@ private:
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector& out_HitLocation) const;
 
 	//10km ray range (defualt unit in Unreal is 1cm per unit)
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float LineTraceRange = 1000000.0f;
 
 public:
