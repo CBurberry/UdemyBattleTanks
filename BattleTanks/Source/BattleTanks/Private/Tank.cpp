@@ -60,8 +60,6 @@ void ATank::Fire()
 
 	if (Barrel && bIsReloaded) 
 	{
-		UE_LOG(LogTemp, Warning, TEXT("FIRE!"));
-
 		//Spawn a projectile at the socket location.
 		AProjectile* Shot = GetWorld()->SpawnActor<AProjectile>
 			(
