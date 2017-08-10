@@ -30,6 +30,9 @@ private:
 protected:
 	class UTankAimingComponent* AimComponent = nullptr;
 
+	UPROPERTY(BlueprintReadOnly)
+	class UTankMovementComponent* MoveComponent = nullptr;
+
 public:
 	// Sets default values for this pawn's properties
 	ATank();
