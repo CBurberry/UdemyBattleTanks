@@ -7,7 +7,7 @@
 
 void UTankMovementComponent::Initialise(UTankTrack* LTrackToSet, UTankTrack* RTrackToSet)
 {
-	if (!LTrackToSet | !RTrackToSet)
+	if (!LTrackToSet || !RTrackToSet)
 	{
 		return;
 	}
@@ -24,7 +24,7 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
 	//float Time = GetWorld()->GetTimeSeconds();
 	//FString Name = GetName();
 
-	if (!LTrack | !RTrack)
+	if (!LTrack || !RTrack)
 	{
 		return;
 	}
@@ -39,7 +39,7 @@ void UTankMovementComponent::IntendTurnRight(float Throw)
 	//float Time = GetWorld()->GetTimeSeconds();
 	//FString Name = GetName();
 
-	if (!LTrack | !RTrack)
+	if (!LTrack || !RTrack)
 	{
 		return;
 	}
