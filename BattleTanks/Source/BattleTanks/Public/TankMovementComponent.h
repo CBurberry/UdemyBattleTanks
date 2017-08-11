@@ -17,6 +17,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "TankMovement")
 	void IntendMoveForward(float Throw);
 
+	UFUNCTION(BlueprintCallable, Category = "TankMovement")
+	void IntendTurnRight(float Throw);
+
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialise(UTankTrack* LTrackToSet, UTankTrack* RTrackToSet);
 	

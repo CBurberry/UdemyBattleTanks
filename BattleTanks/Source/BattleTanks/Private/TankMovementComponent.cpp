@@ -5,21 +5,6 @@
 #include "Public/TankTrack.h"
 
 
-void UTankMovementComponent::IntendMoveForward(float Throw) 
-{
-	//float Time = GetWorld()->GetTimeSeconds();
-	//FString Name = GetName();
-
-	if (!LTrack | !RTrack)
-	{
-		return;
-	}
-
-	UE_LOG(LogTemp, Warning, TEXT("Intend Move Forward Throw: %f"), Throw);
-	LTrack->SetThrottle(Throw);
-	RTrack->SetThrottle(Throw);
-}
-
 void UTankMovementComponent::Initialise(UTankTrack* LTrackToSet, UTankTrack* RTrackToSet)
 {
 	if (!LTrackToSet | !RTrackToSet)
@@ -33,3 +18,34 @@ void UTankMovementComponent::Initialise(UTankTrack* LTrackToSet, UTankTrack* RTr
 	//TODO - Prevent additive dual control speed.
 }
 
+
+void UTankMovementComponent::IntendMoveForward(float Throw) 
+{
+	//float Time = GetWorld()->GetTimeSeconds();
+	//FString Name = GetName();
+
+	if (!LTrack | !RTrack)
+	{
+		return;
+	}
+
+	//UE_LOG(LogTemp, Warning, TEXT("Intend Move Forward Throw: %f"), Throw);
+	LTrack->SetThrottle(Throw);
+	RTrack->SetThrottle(Throw);
+}
+
+void UTankMovementComponent::IntendTurnRight(float Throw) 
+{
+	//float Time = GetWorld()->GetTimeSeconds();
+	//FString Name = GetName();
+
+	if (!LTrack | !RTrack)
+	{
+		return;
+	}
+
+	//UE_LOG(LogTemp, Warning, TEXT("Intend Move Side Throw: %f"), Throw);
+	LTrack->SetThrottle(-Throw);
+	RTrack->SetThrottle(Throw);
+
+}
