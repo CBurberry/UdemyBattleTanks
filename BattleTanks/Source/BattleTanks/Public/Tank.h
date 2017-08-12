@@ -38,6 +38,9 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 
+	//Needed for blueprint BeginPlay event.
+	virtual void BeginPlay() override;
+
 	//Aim the gun at the target location.
 	void AimAt(FVector TargetLocation);
 

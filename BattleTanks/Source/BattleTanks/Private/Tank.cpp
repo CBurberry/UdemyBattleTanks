@@ -18,6 +18,11 @@ ATank::ATank()
 	//MoveComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("MovementComponent"));
 }
 
+void ATank::BeginPlay() 
+{
+	Super::BeginPlay();	//Needed for BP BeginPlay event broadcast.
+}
+
 void ATank::AimAt(FVector TargetLocation) 
 {
 	if (!AimComponent) 
