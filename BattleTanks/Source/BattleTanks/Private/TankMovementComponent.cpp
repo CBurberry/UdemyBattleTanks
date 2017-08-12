@@ -53,5 +53,14 @@ void UTankMovementComponent::IntendTurnRight(float Throw)
 void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) 
 {
 	//No need to call super as we're replacing the functionality.
-	UE_LOG(LogTemp, Warning, TEXT("%s vectoring to: %s"), *GetOwner()->GetName(), *MoveVelocity.ToString())
+	FVector AIForwardIntention = MoveVelocity.GetSafeNormal();
+	FVector TankForwardDirection = GetOwner()->GetActorForwardVector().GetSafeNormal();
+
+	float DotProduct = FVector::DotProduct(AIForwardIntention, TankForwardDirection);
+	FVector CrossProduct = FVector::CrossProduct(TankForwardDirection, AIForwardIntention);
+
+	IntendMoveForward(DotProduct);
+	IntendTurnRight(CrossProduct.Z);
+
+	//E_LOG(LogTemp, Warning, TEXT("%s vectoring to: %s"), *GetOwner()->GetName(), *MoveVelocity.GetSafeNormal().ToString())
 }
