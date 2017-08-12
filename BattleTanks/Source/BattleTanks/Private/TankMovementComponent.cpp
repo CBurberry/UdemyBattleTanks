@@ -21,30 +21,21 @@ void UTankMovementComponent::Initialise(UTankTrack* LTrackToSet, UTankTrack* RTr
 
 void UTankMovementComponent::IntendMoveForward(float Throw) 
 {
-	//float Time = GetWorld()->GetTimeSeconds();
-	//FString Name = GetName();
-
 	if (!LTrack || !RTrack)
 	{
 		return;
 	}
 
-	//UE_LOG(LogTemp, Warning, TEXT("Intend Move Forward Throw: %f"), Throw);
 	LTrack->SetThrottle(Throw);
 	RTrack->SetThrottle(Throw);
 }
 
 void UTankMovementComponent::IntendTurnRight(float Throw) 
 {
-	//float Time = GetWorld()->GetTimeSeconds();
-	//FString Name = GetName();
-
 	if (!LTrack || !RTrack)
 	{
 		return;
 	}
-
-	//UE_LOG(LogTemp, Warning, TEXT("Intend Move Side Throw: %f"), Throw);
 	LTrack->SetThrottle(-Throw);
 	RTrack->SetThrottle(Throw);
 
@@ -61,6 +52,4 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 
 	IntendMoveForward(DotProduct);
 	IntendTurnRight(CrossProduct.Z);
-
-	//E_LOG(LogTemp, Warning, TEXT("%s vectoring to: %s"), *GetOwner()->GetName(), *MoveVelocity.GetSafeNormal().ToString())
 }
