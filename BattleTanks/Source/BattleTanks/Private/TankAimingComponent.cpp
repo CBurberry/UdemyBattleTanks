@@ -16,6 +16,18 @@ UTankAimingComponent::UTankAimingComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
+void UTankAimingComponent::Initialise(UTankBarrel* TankBarrel, UTankTurret* TankTurret) 
+{
+	if (!TankBarrel || TankTurret) 
+	{
+		return;
+	}
+
+	Barrel = TankBarrel;
+	Turret = TankTurret;
+}
+
+
 void UTankAimingComponent::AimAt(FVector TargetLocation, float LaunchSpeed) 
 {
 	auto BarrelLocation = Barrel->GetComponentLocation();
@@ -51,16 +63,6 @@ void UTankAimingComponent::AimAt(FVector TargetLocation, float LaunchSpeed)
 		//UE_LOG(LogTemp, Warning, TEXT("%s Aiming at: %s"), *GetOwner()->GetName(), *LaunchDirectionVector.ToString());
 		MoveBarrelTowards(LaunchDirectionVector);
 	}
-}
-
-void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet) 
-{
-	Barrel = BarrelToSet;
-}
-
-void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
-{
-	Turret = TurretToSet;
 }
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)

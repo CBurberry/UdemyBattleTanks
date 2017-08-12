@@ -14,8 +14,6 @@ void UTankMovementComponent::Initialise(UTankTrack* LTrackToSet, UTankTrack* RTr
 
 	LTrack = LTrackToSet;
 	RTrack = RTrackToSet;
-
-	//TODO - Prevent additive dual control speed.
 }
 
 

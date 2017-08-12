@@ -28,6 +28,7 @@ private:
 	class UTankBarrel* Barrel = nullptr;
 
 protected:
+	UPROPERTY(BlueprintReadOnly)
 	class UTankAimingComponent* AimComponent = nullptr;
 
 	UPROPERTY(BlueprintReadOnly)
@@ -37,20 +38,8 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
-
 	//Aim the gun at the target location.
 	void AimAt(FVector TargetLocation);
-
-	UFUNCTION(BlueprintCallable, Category = "TankSetup")
-	void SetBarrelReference(class UTankBarrel* BarrelToSet);
-
-	UFUNCTION(BlueprintCallable, Category = "TankSetup")
-	void SetTurretReference(class UTankTurret* TurretToSet);
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
