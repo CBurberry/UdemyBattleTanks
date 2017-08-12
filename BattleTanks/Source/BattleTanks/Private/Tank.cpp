@@ -20,6 +20,11 @@ ATank::ATank()
 
 void ATank::AimAt(FVector TargetLocation) 
 {
+	if (!AimComponent) 
+	{
+		return;
+	}
+		
 	AimComponent->AimAt(TargetLocation, LaunchSpeed);
 }
 
