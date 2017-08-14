@@ -10,38 +10,7 @@ class BATTLETANKS_API ATank : public APawn
 {
 	GENERATED_BODY()
 
-private:
-	//TODO - remove once fire is successfully moved.
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float LaunchSpeed = 4000.0f;	//TODO - find sensible default.
-
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float ReloadTimeInSeconds = 3.0f;
-
-	double LastFiredTime = 0.0f;
-
-	//Selectable dropdown in editor.
-	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-	TSubclassOf<class AProjectile> ProjectileBlueprint;
-
-	//Local barrel reference for spawning projectile.
-	class UTankBarrel* Barrel = nullptr;
-
-protected:
-	UPROPERTY(BlueprintReadOnly)
-	class UTankAimingComponent* AimComponent = nullptr;
-
 public:
 	// Sets default values for this pawn's properties
 	ATank();
-
-	//Needed for blueprint BeginPlay event.
-	virtual void BeginPlay() override;
-
-	//Aim the gun at the target location.
-	void AimAt(FVector TargetLocation);
-
-	UFUNCTION(BlueprintCallable, Category = "Firing")
-	void Fire();
-	
 };

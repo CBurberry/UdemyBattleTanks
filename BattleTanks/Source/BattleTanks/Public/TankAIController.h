@@ -14,9 +14,6 @@ class BATTLETANKS_API ATankAIController : public AAIController
 	GENERATED_BODY()
 	
 private:
-	class ATank* ControlledTank;
-	class ATank* TargetPlayer;
-
 	//How close can the AI tank get.
 	UPROPERTY(EditDefaultsOnly)
 	float AcceptanceRadius = 3000.0f;
