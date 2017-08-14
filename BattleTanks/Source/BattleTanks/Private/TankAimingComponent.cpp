@@ -27,8 +27,18 @@ void UTankAimingComponent::BeginPlay()
 
 void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisFunction)
 {
-	auto Time = FPlatformTime::Seconds();
-	UE_LOG(LogTemp, Warning, TEXT("%f: Aim Comp Ticking!"), Time)
+	if ((FPlatformTime::Seconds() - LastFiredTime) < ReloadTimeInSeconds)
+	{
+		FiringState = EFiringState::Reloading;
+	} 
+	else if (IsBarrelMoving())
+	{
+		FiringState = EFiringState::Aiming;
+	}
+	else 
+	{
+		FiringState = EFiringState::Locked;
+	}
 }
 
 void UTankAimingComponent::Initialise(UTankBarrel* TankBarrel, UTankTurret* TankTurret) 
@@ -74,9 +84,9 @@ void UTankAimingComponent::AimAt(FVector TargetLocation)
 	//TODO - Currently always true even when looking at the sky, probbaly to do with out_hitlocation set to 0 when nothing in range.
 	if (result) 
 	{
-		FVector LaunchDirectionVector = out_LaunchVelocity.GetSafeNormal();
+		AimAtTargetLocation = out_LaunchVelocity.GetSafeNormal();
 		//UE_LOG(LogTemp, Warning, TEXT("%s Aiming at: %s"), *GetOwner()->GetName(), *LaunchDirectionVector.ToString());
-		MoveBarrelTowards(LaunchDirectionVector);
+		MoveBarrelTowards(AimAtTargetLocation);
 	}
 }
 
@@ -97,11 +107,26 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	Turret->Rotate(DeltaRotator.Yaw);
 }
 
+bool UTankAimingComponent::IsBarrelMoving() 
+{
+	if (!ensure(Barrel)) 
+	{
+		return false;
+	}
+
+	FVector BarrelForwardVector = Barrel->GetForwardVector().GetSafeNormal();
+	FVector BarrelAimVector = AimAtTargetLocation;
+
+	if (BarrelForwardVector.Equals(BarrelAimVector, 0.1f)) 
+	{
+		return false;
+	}
+	return true;
+}
+
 void UTankAimingComponent::Fire()
 {
-	bool bIsReloaded = (FPlatformTime::Seconds() - LastFiredTime) > ReloadTimeInSeconds;
-
-	if (bIsReloaded)
+	if (FiringState != EFiringState::Reloading)
 	{
 		if (!ensure(Barrel)) { return; }
 		if (!ensure(ProjectileBlueprint)) { return; }
@@ -115,6 +140,7 @@ void UTankAimingComponent::Fire()
 
 		Shot->LaunchProjectile(LaunchSpeed);
 		LastFiredTime = FPlatformTime::Seconds();
+		FiringState = EFiringState::Reloading;
 	}
 }
 

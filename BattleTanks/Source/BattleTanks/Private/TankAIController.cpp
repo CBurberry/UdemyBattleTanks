@@ -20,7 +20,7 @@ void ATankAIController::Tick(float deltaTime)
 	UTankAimingComponent* AimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
 
 	//Assuming that the AI always has a tank and a target player.
-	if ( !ensure(ControlledTank && TargetPlayer))
+	if ( !ensure(ControlledTank) || !ensure(TargetPlayer) || !ensure(AimingComponent))
 	{
 		return;
 	}

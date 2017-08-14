@@ -22,7 +22,7 @@ class BATTLETANKS_API UTankAimingComponent : public UActorComponent
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
-	EFiringState FiringState = EFiringState::Aiming;
+	EFiringState FiringState = EFiringState::Reloading;
 
 private:
 	class UTankBarrel* Barrel = nullptr;
@@ -42,6 +42,11 @@ private:
 	float ReloadTimeInSeconds = 3.0f;
 
 	double LastFiredTime = 0.0f;
+
+	//Is the barrel is currently rotating?
+	bool IsBarrelMoving();
+
+	FVector AimAtTargetLocation = FVector::ZeroVector;
 
 public:	
 	// Sets default values for this component's properties
