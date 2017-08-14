@@ -5,7 +5,7 @@
 #include "Public/TankAimingComponent.h"
 #include "Public/TankBarrel.h"
 #include "Public/TankTurret.h"
-#include "Public/pROJECTILE.H"
+#include "Public/Projectile.h"
 
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
@@ -14,7 +14,6 @@ UTankAimingComponent::UTankAimingComponent()
 	// off to improve performance if you don't need them.
 	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = true;
-	RegisterComponent();
 }
 
 void UTankAimingComponent::BeginPlay() 

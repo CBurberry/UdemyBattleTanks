@@ -7,7 +7,6 @@
 UTankTrack::UTankTrack() 
 {
 	PrimaryComponentTick.bCanEverTick = true;
-	RegisterComponent();
 }
 
 void UTankTrack::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisFunction)
@@ -28,7 +27,6 @@ void UTankTrack::TickComponent(float DeltaTime, enum ELevelTick TickType, FActor
 
 	//Calculate and apply sideways force (f = ma).
 	FVector CorrectionForce = (TankRoot->GetMass() * CorrectionAcceleration) / 2;	//Two tracks.
-	UE_LOG(LogTemp, Warning, TEXT("CorrectionForce: %s"), *CorrectionForce.ToString())
 	TankRoot->AddForce(CorrectionForce);
 }
 
