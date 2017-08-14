@@ -36,7 +36,7 @@ void ATankPlayerController::Tick(float deltaTime)
 
 void ATankPlayerController::AimTowardsCrosshair() 
 {
-	if (!ensure(GetPawn())) 
+	if (!GetPawn()) 
 	{
 		return;
 	}

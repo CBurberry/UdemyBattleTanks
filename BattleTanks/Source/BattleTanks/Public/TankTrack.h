@@ -13,8 +13,12 @@ class BATTLETANKS_API UTankTrack : public UStaticMeshComponent
 {
 	GENERATED_BODY()
 	
+private:
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisFunction) override;
+
 public:
-	//TODO - clamp throttle value [-1, 1]
+	UTankTrack();
+
 	UFUNCTION(BlueprintCallable, Category = "Input")
 	void SetThrottle(float ThrottleValue);
 	
