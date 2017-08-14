@@ -5,14 +5,13 @@
 #include "Public/Tank.h"
 #include "Public/TankBarrel.h"
 #include "Public/Projectile.h"
-#include "Public/TankMovementComponent.h"
 
 // Sets default values
 ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-
+	
 	//No need to protect pointers as added in construction.
 	//AimComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("AimingComponent"));
 	//MoveComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("MovementComponent"));
@@ -21,11 +20,14 @@ ATank::ATank()
 void ATank::BeginPlay() 
 {
 	Super::BeginPlay();	//Needed for BP BeginPlay event broadcast.
+
+	AimComponent = FindComponentByClass<UTankAimingComponent>();
+	Barrel = FindComponentByClass<UTankBarrel>();
 }
 
 void ATank::AimAt(FVector TargetLocation) 
 {
-	if (!AimComponent) 
+	if (!ensure(AimComponent))
 	{
 		return;
 	}
@@ -37,7 +39,7 @@ void ATank::Fire()
 {
 	bool bIsReloaded = (FPlatformTime::Seconds() - LastFiredTime) > ReloadTimeInSeconds;
 
-	if (Barrel && bIsReloaded) 
+	if (ensure(Barrel && bIsReloaded))
 	{
 		//Spawn a projectile at the socket location.
 		AProjectile* Shot = GetWorld()->SpawnActor<AProjectile>

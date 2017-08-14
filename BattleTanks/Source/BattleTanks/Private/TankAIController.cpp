@@ -3,7 +3,7 @@
 #include "BattleTanks.h"
 #include "Public/Tank.h"
 #include "Public/TankAIController.h"
-
+// Depends on movement component via pathfinding system.
 
 void ATankAIController::BeginPlay()
 {
@@ -18,7 +18,7 @@ void ATankAIController::Tick(float deltaTime)
 	TargetPlayer = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 
 	//Assuming that the AI always has a tank and a target player.
-	if (!ControlledTank || !TargetPlayer) 
+	if ( !ensure(ControlledTank && TargetPlayer))
 	{
 		return;
 	}

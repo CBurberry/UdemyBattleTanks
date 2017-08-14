@@ -11,7 +11,7 @@ class BATTLETANKS_API ATank : public APawn
 	GENERATED_BODY()
 
 private:
-
+	//TODO - remove once fire is successfully moved.
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 4000.0f;	//TODO - find sensible default.
 
@@ -30,9 +30,6 @@ private:
 protected:
 	UPROPERTY(BlueprintReadOnly)
 	class UTankAimingComponent* AimComponent = nullptr;
-
-	UPROPERTY(BlueprintReadOnly)
-	class UTankMovementComponent* MoveComponent = nullptr;
 
 public:
 	// Sets default values for this pawn's properties

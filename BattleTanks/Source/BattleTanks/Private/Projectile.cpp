@@ -2,7 +2,6 @@
 
 #include "BattleTanks.h"
 #include "Public/Projectile.h"
-#include "GameFramework/ProjectileMovementComponent.h"
 
 // Sets default values
 AProjectile::AProjectile()

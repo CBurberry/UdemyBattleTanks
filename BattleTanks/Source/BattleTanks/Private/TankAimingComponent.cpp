@@ -6,7 +6,6 @@
 #include "Public/TankBarrel.h"
 #include "Public/TankTurret.h"
 
-
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
 {
@@ -18,7 +17,7 @@ UTankAimingComponent::UTankAimingComponent()
 
 void UTankAimingComponent::Initialise(UTankBarrel* TankBarrel, UTankTurret* TankTurret) 
 {
-	if (!TankBarrel || TankTurret) 
+	if ( !ensure(TankBarrel && TankTurret))
 	{
 		return;
 	}
@@ -33,7 +32,7 @@ void UTankAimingComponent::AimAt(FVector TargetLocation, float LaunchSpeed)
 	auto BarrelLocation = Barrel->GetComponentLocation();
 	//UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s from %s"), *GetOwner()->GetName(),*TargetLocation.ToString(), *BarrelLocation.ToString());
 
-	if (!Barrel || !Turret) 
+	if ( !ensure(Barrel && Turret))
 	{
 		return;
 	}
@@ -67,7 +66,7 @@ void UTankAimingComponent::AimAt(FVector TargetLocation, float LaunchSpeed)
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
-	if (!Barrel || !Turret)
+	if ( !ensure(Barrel && Turret))
 	{
 		return;
 	}
