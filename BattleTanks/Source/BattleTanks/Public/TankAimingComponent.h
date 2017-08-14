@@ -28,6 +28,8 @@ private:
 	class UTankBarrel* Barrel = nullptr;
 	class UTankTurret* Turret = nullptr;
 
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisFunction) override;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 4000.0f;
 
@@ -44,6 +46,8 @@ private:
 public:	
 	// Sets default values for this component's properties
 	UTankAimingComponent();
+
+	virtual void BeginPlay() override;
 
 	void AimAt(FVector WorldSpaceAim);
 

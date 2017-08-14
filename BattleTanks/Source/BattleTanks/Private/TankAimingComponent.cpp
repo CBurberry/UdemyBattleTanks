@@ -14,6 +14,21 @@ UTankAimingComponent::UTankAimingComponent()
 	// off to improve performance if you don't need them.
 	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = true;
+	RegisterComponent();
+}
+
+void UTankAimingComponent::BeginPlay() 
+{
+	Super::BeginPlay();
+
+	//So that first shot is after initial reload.
+	LastFiredTime = FPlatformTime::Seconds();
+}
+
+void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisFunction)
+{
+	auto Time = FPlatformTime::Seconds();
+	UE_LOG(LogTemp, Warning, TEXT("%f: Aim Comp Ticking!"), Time)
 }
 
 void UTankAimingComponent::Initialise(UTankBarrel* TankBarrel, UTankTurret* TankTurret) 
@@ -86,8 +101,10 @@ void UTankAimingComponent::Fire()
 {
 	bool bIsReloaded = (FPlatformTime::Seconds() - LastFiredTime) > ReloadTimeInSeconds;
 
-	if (ensure(Barrel && ProjectileBlueprint && bIsReloaded))
+	if (bIsReloaded)
 	{
+		if (!ensure(Barrel)) { return; }
+		if (!ensure(ProjectileBlueprint)) { return; }
 		//Spawn a projectile at the socket location.
 		AProjectile* Shot = GetWorld()->SpawnActor<AProjectile>
 			(
