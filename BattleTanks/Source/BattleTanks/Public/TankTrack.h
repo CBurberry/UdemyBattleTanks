@@ -19,6 +19,10 @@ private:
 
 	void ApplySidewaysForce();
 
+	void DriveTrack();
+
+	float CurrentThrottle = 0.0f;
+
 public:
 	UTankTrack();
 
