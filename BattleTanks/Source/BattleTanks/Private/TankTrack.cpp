@@ -6,7 +6,7 @@
 
 UTankTrack::UTankTrack() 
 {
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
 }
 
 void UTankTrack::BeginPlay() 
@@ -16,21 +16,17 @@ void UTankTrack::BeginPlay()
 
 void UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit) 
 {
-	
+	//Drive the tank
+	ApplySidewaysForce();
 }
 
-void UTankTrack::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisFunction)
+void UTankTrack::ApplySidewaysForce() 
 {
-	/*
-		This should be included in general as it will otherwise call the BP TickComponent,
-		not a problem here although as no BP derives this cpp class.
-	*/
-	Super::TickComponent(DeltaTime, TickType, ThisFunction);
-
 	//Calculate the slippage speed
 	float SlippageSpeed = FVector::DotProduct(GetRightVector(), GetComponentVelocity());
 
 	//Work-out the required acceleration this frame to correct
+	float DeltaTime = GetWorld()->GetDeltaSeconds();
 	FVector CorrectionAcceleration = -SlippageSpeed / DeltaTime * GetRightVector();
 
 	UStaticMeshComponent* TankRoot = Cast<UStaticMeshComponent>(GetOwner()->GetRootComponent());
