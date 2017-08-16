@@ -12,7 +12,8 @@ enum class EFiringState : uint8
 {
 	Locked = 0,
 	Aiming,
-	Reloading
+	Reloading,
+	OutOfAmmo
 };
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -48,6 +49,8 @@ private:
 
 	FVector AimAtTargetLocation = FVector::ZeroVector;
 
+	int RoundsLeft = 3;
+
 public:	
 	// Sets default values for this component's properties
 	UTankAimingComponent();
@@ -65,4 +68,7 @@ public:
 	void Fire();
 
 	EFiringState GetFiringState() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	int GetRoundsLeft() const;
 };
