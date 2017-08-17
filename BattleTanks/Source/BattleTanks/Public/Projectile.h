@@ -13,6 +13,10 @@ class BATTLETANKS_API AProjectile : public AActor
 
 private:
 	class UProjectileMovementComponent* ProjMoveComponent = nullptr;
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	class UStaticMeshComponent* CollisionMesh = nullptr;
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	class UParticleSystemComponent* LaunchBlast = nullptr;
 public:	
 	// Sets default values for this actor's properties
 	AProjectile();

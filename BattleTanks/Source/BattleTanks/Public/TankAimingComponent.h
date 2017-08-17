@@ -49,7 +49,8 @@ private:
 
 	FVector AimAtTargetLocation = FVector::ZeroVector;
 
-	int RoundsLeft = 3;
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int32 RoundsLeft = 3;
 
 public:	
 	// Sets default values for this component's properties
@@ -70,5 +71,5 @@ public:
 	EFiringState GetFiringState() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
-	int GetRoundsLeft() const;
+	int32 GetRoundsLeft() const;
 };
