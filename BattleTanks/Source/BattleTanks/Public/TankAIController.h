@@ -22,6 +22,8 @@ private:
 
 	UFUNCTION()
 	void OnTankDeath();
+
+	class ATank* TankRef = nullptr;
 public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float deltaTime) override;

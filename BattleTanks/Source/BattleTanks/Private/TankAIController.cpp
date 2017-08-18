@@ -23,15 +23,10 @@ void ATankAIController::SetPawn(APawn* InPawn)
 		{
 			return;
 		}
-
+		TankRef = PossessedTank;
 		//Subscribe our local method to the tank's death event.
 		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnTankDeath);
 	}
-}
-
-void ATankAIController::OnTankDeath()
-{
-	UE_LOG(LogTemp, Warning, TEXT("AI RELEASE TANK"))
 }
 
 void ATankAIController::Tick(float deltaTime) 
@@ -59,6 +54,15 @@ void ATankAIController::Tick(float deltaTime)
 	if (AimingComponent->GetFiringState() == EFiringState::Locked) 
 	{
 		AimingComponent->Fire();
+	}
+}
+
+void ATankAIController::OnTankDeath()
+{
+	if (TankRef) 
+	{
+		UE_LOG(LogTemp, Warning, TEXT("AI RELEASE TANK"))
+		TankRef->DetachFromControllerPendingDestroy();
 	}
 }
 
