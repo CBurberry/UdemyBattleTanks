@@ -5,6 +5,8 @@
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDeathEvent);
+
 UCLASS()
 class BATTLETANKS_API ATank : public APawn
 {
@@ -19,6 +21,7 @@ private:
 
 	// Sets default values for this pawn's properties
 	ATank();
+
 protected:
 
 public:
@@ -27,4 +30,7 @@ public:
 	//Returns current health as a %age of starting.
 	UFUNCTION(BlueprintPure, Category = "HealthBar")
 	float GetHealthPercent() const;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnDeathEvent OnDeath;
 };

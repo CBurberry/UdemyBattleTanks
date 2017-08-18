@@ -3,6 +3,7 @@
 #include "BattleTanks.h"
 #include "TankPlayerController.h"
 #include "Public/TankAimingComponent.h"
+#include "Tank.h"
 
 
 void ATankPlayerController::BeginPlay() 
@@ -107,3 +108,26 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& 
 	FVector CameraLocationInWorld;
 	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, CameraLocationInWorld, out_LookDirection);
 }
+
+void ATankPlayerController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+
+	if (InPawn)
+	{
+		ATank* PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank))
+		{
+			return;
+		}
+
+		//Subscribe our local method to the tank's death event.
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnTankDeath);
+	}
+}
+
+void ATankPlayerController::OnTankDeath()
+{
+	UE_LOG(LogTemp, Warning, TEXT("PLAYER RELEASE TANK"))
+}
+

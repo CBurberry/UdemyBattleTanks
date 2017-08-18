@@ -20,6 +20,7 @@ float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEv
 	if (CurrentHealth == 0) 
 	{
 		UE_LOG(LogTemp, Error, TEXT("%s has been destroyed!"), *GetName())
+		OnDeath.Broadcast();
 	}
 
 	return DamageToApply;

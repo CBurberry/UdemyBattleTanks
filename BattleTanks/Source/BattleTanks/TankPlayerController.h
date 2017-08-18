@@ -25,6 +25,11 @@ private:
 	//Get world location of linetrace through crosshair, true if hits landscape.
 	bool GetSightRayHitLocation(FVector& out_HitLocation) const;
 
+	virtual void SetPawn(APawn* InPawn) override;
+
+	UFUNCTION()
+	void OnTankDeath();
+
 	UPROPERTY(EditDefaultsOnly)
 	float CrosshairXLocation = 0.5f;
 
