@@ -22,6 +22,9 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class URadialForceComponent* ExplosionForce = nullptr;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float ProjectileDamage = 20.0f;
+
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& out_Hit);
 
