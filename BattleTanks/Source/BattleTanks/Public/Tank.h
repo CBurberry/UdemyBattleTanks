@@ -16,11 +16,15 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Health")
 	int32 CurrentHealth = StartingHealth;
+
+	// Sets default values for this pawn's properties
+	ATank();
 protected:
 
 public:
-	// Sets default values for this pawn's properties
-	ATank();
-
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
+	//Returns current health as a %age of starting.
+	UFUNCTION(BlueprintPure, Category = "HealthBar")
+	float GetHealthPercent() const;
 };
