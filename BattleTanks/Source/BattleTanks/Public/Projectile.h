@@ -19,9 +19,18 @@ private:
 	class UParticleSystemComponent* LaunchBlast = nullptr;
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UParticleSystemComponent* ImpactBlast = nullptr;
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	class URadialForceComponent* ExplosionForce = nullptr;
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& out_Hit);
+
+	UFUNCTION()
+	void OnTimerExpire();
+protected:
+	UPROPERTY(EditDefaultsOnly, Category = "Despawn")
+	float DestroyDelay = 10.0f;
+
 public:	
 	// Sets default values for this actor's properties
 	AProjectile();
